@@ -1,17 +1,15 @@
 /** @format */
 import React from 'react';
 import { AppRegistry, View } from 'react-native';
-import Header from './src/components/Header';
+import { StackNavigator } from 'react-navigation';
 import ToDoList from './src/components/ToDoList';
+import AddToDo from './src/components/AddToDo';
 
-const App = () => (
-  <View>
-    <Header headerText="To Do" />
-    <ToDoList />
-  </View>
-);
-// import { AppRegistry } from 'react-native';
-// import App from './App';
-// import { name as appName } from './app.json';
+const Navigation = StackNavigator({
+  First: { screen: ToDoList },
+  Second: { screen: AddToDo },
+});
 
-AppRegistry.registerComponent('todolist', () => App);
+
+
+AppRegistry.registerComponent('todolist', () => Navigation);

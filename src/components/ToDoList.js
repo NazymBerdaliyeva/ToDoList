@@ -1,11 +1,29 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, Style, TouchableOpacity } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import Header from './Header';
+import Button from './Button';
 
+const util = require('util');
 
 class ToDoList extends Component {
-  state = { tasks: [], newTask: ''};
-  //const {containerStyle, itemStyle} = styles;
+  static navigationOptions = ({ navigation }) => {
+      const params = navigation.state.params || {};
+
+      return {
+        headerTitle: 'To Do',
+        headerRight: (
+          <Button
+            onPress={() => navigation.navigate('Second')} >
+            Add
+          </Button>
+        ),
+      };
+    };
+   state = { newTask: '' };
   render() {
+    console.log(require('util').inspect(this.props.navigation, false, null ));
+    var {navigate} = this.props.navigation;
     return (
       <View style={styles.containerStyle}>
           <FlatList
@@ -19,7 +37,7 @@ class ToDoList extends Component {
               {key: 'Shopping'},
             ]}
             renderItem={({item}) =>
-            <TouchableOpacity onPress= {() => console.log('pressed!')}>
+            <TouchableOpacity onPress= {() => console.log('Pressed!')}>
               <Text style={styles.itemStyle}>{item.key}</Text>
             </TouchableOpacity>}
           />
